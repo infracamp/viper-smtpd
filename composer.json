@@ -1,0 +1,18 @@
+{
+
+    "authors": [
+        {
+            "name": "Matthias Leuffen",
+            "email": "leuffen@continue.de"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "config.php"
+        ]
+    },
+    "require": {
+        "phore/system": "dev-master",
+        "text/template": "^2.4"
+    }
+}

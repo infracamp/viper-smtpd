@@ -1,0 +1,19 @@
+# Kickstart container config file - see https://gitub.com/c7lab/kickstart
+# Run ./kickstart.sh to start a development-container for this project
+version: 1
+from: "continue/kickstart-flavor-gaia:testing"
+
+config_file:
+  template: "config.php.dist"
+  target: "config.php"
+
+command:
+  build:
+    - "sudo apt-get update -y"
+    - "sudo debconf-set-selections preseed.txt"
+    - "sudo DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -q -y postfix syslog-ng sasl2-bin libsasl2-2 libsasl2-modules net-tools"
+    - "composer update"
+
+  run:
+    - "sudo php -f /opt/bin/smtp-update-config.php"
+    - "sudo service postfix restart"

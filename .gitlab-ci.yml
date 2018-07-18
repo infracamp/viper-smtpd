@@ -1,0 +1,16 @@
+image: docker:stable
+stages:
+  - build
+
+before_script:
+  - apk update && apk add bash curl
+
+latest:
+  stage: build
+  script:
+    - "echo hallo welt"
+    - "ls -l"
+    - "docker pull continue/kickstart-flavor-gaia:testing"
+    - "./kickstart.sh --ci-build"
+  only:
+    - master
