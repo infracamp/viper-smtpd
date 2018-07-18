@@ -13,7 +13,7 @@ use Leuffen\TextTemplate\TextTemplate;
 require __DIR__ . "/../vendor/autoload.php";
 
 
-define("FILES_ENV_SENDERS", "/etc/postfix/env_senders");
+define("FILES_ENV_SENDERS", "/etc/postfix/controlled_envelope_senders");
 
 
 $config = json_decode(CONF_JSON, true);

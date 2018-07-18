@@ -13,7 +13,13 @@ command:
     - "sudo debconf-set-selections preseed.txt"
     - "sudo DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -q -y postfix syslog-ng sasl2-bin libsasl2-2 libsasl2-modules net-tools"
     - "composer update"
+    - "sudo sed -i 's/#SYSLOGNG_OPTS=\"--no-caps\"/SYSLOGNG_OPTS=\"--no-caps\"/' /etc/default/syslog-ng"
+    - "sudo cp /opt/etc/default/saslauthd /etc/default/"
 
   run:
     - "sudo php -f /opt/bin/smtp-update-config.php"
-    - "sudo service postfix restart"
+    - "sudo service syslog-ng restart"
+    - "sudo service postfix reload"
+
+  test:
+    - "php -f bin/test-sasl-auth.php"
