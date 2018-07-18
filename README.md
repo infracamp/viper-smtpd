@@ -1,12 +1,14 @@
 # infracamp viper-smtpd :: Ready to use mail relay container
 
-- Relay Host
+- SMTP Relay Host
 - SASL Authentication
+- Restrict sender addresses by sasl-auth
 - Designed to
     - Relay mail from smtp clients (Applications / Websites)
-
+    - MX
 - See the configuration files
     - [postfix/main.cf](etc/postfix/main.cf)
+- [Lessons learned creating this container](doc/LESSONS_LEARNED.md)
 
 ## Running the container
 
@@ -22,9 +24,10 @@ Create a `smtp-config.json` and adjust ist to your needs. ([See demo.json](doc/d
 }
 ```
 
+To start the container in production mode just call:
 
 ```
-docker run --net host -e CONF_JSON=$(printf %q "`cat smtp-config.json`") infracamp/cobra-smtp
+docker run --net host -e CONF_JSON=$(printf %q "`cat smtp-config.json`") infracamp/viper-smtpd
 ```
 
 or use
@@ -39,15 +42,9 @@ to create a string representation to put into env-File
 ## Creating Passwords
 
 
-## Logging
+## Contributing
 
-The container comes with `syslog-ng` for logging. Syslog-NG must be
-reconfigured to work correctly in containers:
-
-```
-sudo sed -i 's/#SYSLOGNG_OPTS=\"--no-caps\"/SYSLOGNG_OPTS=\"--no-caps\"/' /etc/default/syslog-ng
-```
-
+Help us developing this container. To start the container just run `./kickstart.sh`.
 
 ## References
 

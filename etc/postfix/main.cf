@@ -37,7 +37,6 @@ broken_sasl_auth_clients = yes
 smtpd_sasl_authenticated_header = yes
 
 smtpd_sasl_type = cyrus
-smtpd_sasl_application_name = smtpd
 smtpd_sasl_path = smtpd
 
 smtpd_sasl_security_options =
