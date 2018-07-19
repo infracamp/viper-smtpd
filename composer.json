@@ -15,5 +15,8 @@
         "phore/system": "dev-master",
         "text/template": "^2.4",
         "phpmailer/phpmailer": "^6.0"
+    },
+    "require-dev": {
+        "nette/tester": "^2.0"
     }
 }

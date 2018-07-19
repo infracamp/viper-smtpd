@@ -18,8 +18,8 @@ Create a `smtp-config.json` and adjust ist to your needs. ([See demo.json](doc/d
 {
     "mynetworks": "127.0.0.1",
     "sasl_users": [
-        "user:crypted_passwd:sender@domain1.de,@domain2.de"
-        "nextUser:crypted_passwd:allowed@domain2.de"
+        "user1@domain.de:passwd:sender@domain1.de,@domain2.de"
+        "user2@domain.de:passwd:@domain2.de"
     ]
 }
 ```

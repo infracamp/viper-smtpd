@@ -26,6 +26,9 @@ echo "\nWriting /etc/postfix/main.cfg...";
 file_put_contents("/etc/postfix/main.cf", $tpl->apply($config));
 
 
+file_put_contents("/etc/postfix/sasl/smtpd.conf", file_get_contents(__DIR__ . "/../etc/postfix/sasl/smtpd.conf"));
+file_put_contents("/etc/postfix/master.cf", file_get_contents(__DIR__ . "/../etc/postfix/master.cf"));
+
 $envelopeSenders = [];
 foreach ($config["smtp_sasl_users"] as $curUser) {
     [$user, $pass, $allowedSenderDomains] = explode(":", $curUser);
@@ -37,10 +40,12 @@ foreach ($config["smtp_sasl_users"] as $curUser) {
     phore_exec("echo :passwd | saslpasswd2 -p -c -u :domain :user", ["user"=>$user, "domain"=>$domain, "passwd"=>$pass]);
 
     foreach (explode(",", $allowedSenderDomains) as $curDomain) {
+        if ($curDomain === "*")
+            $curDomain = "";
         if ( ! isset ($envelopeSenders[$curDomain])) {
             $envelopeSenders[$curDomain] = [];
         }
-        $envelopeSenders[$curDomain][] = $user;
+        $envelopeSenders[$curDomain][] = $user."@".$domain;
     }
 
 }
