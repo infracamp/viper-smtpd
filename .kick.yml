@@ -29,3 +29,5 @@ command:
     - "vendor/bin/tester test/"
     #- "php -f bin/test-sasl-auth.php"
 
+  bash:
+    - "/bin/bash"
