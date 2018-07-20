@@ -1,4 +1,4 @@
-FROM continue/kickstart-flavor-gaia:testing
+FROM infracamp/kickstart-flavor-gaia:testing
 
 ENV DEV_CONTAINER_NAME="viper-smtpd"
 
