@@ -1,6 +1,6 @@
 # infracamp viper-smtpd :: Ready to use mail relay container
 
-- [InfraCamp Homepage](http://infracamp.org)
+- [InfraCAMP Homepage](http://infracamp.org)
 - SMTP Relay Host
 - SASL Authentication
 - Restrict sender addresses by sasl-auth
