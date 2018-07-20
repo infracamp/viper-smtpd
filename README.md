@@ -30,13 +30,13 @@ Create a `smtp-config.json` and adjust ist to your needs. ([See demo.json](doc/d
 To start the container in production mode just call:
 
 ```
-docker run --net host -e CONF_JSON=$(printf %q "`cat smtp-config.json`") infracamp/viper-smtpd
+docker run --net host -e "CONF_JSON=$(tr -d \'\n\' < doc/smtp-config.json)" infracamp/viper-smtpd
 ```
 
 or use
 
 ```
-awk '1' [input-file.json]
+tr -d '\n' < doc/smtp-config.json
 ```
 
 to create a string representation to put into env-File

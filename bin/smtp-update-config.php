@@ -55,4 +55,11 @@ foreach ($envelopeSenders as $envSender => $users) {
     $envSenders .= "\n$envSender  " . implode(", ", $users);
 }
 file_put_contents(FILES_ENV_SENDERS, $envSenders);
-phore_exec("postmap hash:" . FILES_ENV_SENDERS);
+try {
+    phore_exec("postmap hash:".FILES_ENV_SENDERS);
+} catch (\Exception $e) {
+    echo "\nFailed postmap: File contents of " . FILES_ENV_SENDERS;
+    echo "\n------------------------\n" . file_get_contents(FILES_ENV_SENDERS) . "\n---------------------\n";
+    throw $e;
+}
+echo "\n";
