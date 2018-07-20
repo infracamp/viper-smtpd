@@ -1,7 +1,7 @@
 # Kickstart container config file - see https://gitub.com/c7lab/kickstart
 # Run ./kickstart.sh to start a development-container for this project
 version: 1
-from: "continue/kickstart-flavor-gaia:testing"
+from: "infracamp/kickstart-flavor-gaia:testing"
 
 config_file:
   template: "config.php.dist"
@@ -15,11 +15,20 @@ command:
     - "composer update"
     - "sudo sed -i 's/#SYSLOGNG_OPTS=\"--no-caps\"/SYSLOGNG_OPTS=\"--no-caps\"/' /etc/default/syslog-ng"
     - "sudo cp /opt/etc/default/saslauthd /etc/default/"
+    - "sudo touch /etc/sasldb2 && sudo chown postfix:sasl /etc/sasldb2"
 
   run:
     - "sudo php -f /opt/bin/smtp-update-config.php"
     - "sudo service syslog-ng restart"
-    - "sudo service postfix reload"
+    - "sudo service postfix start"
+
+  log:
+    - "tail -f /var/log/mail.log"
 
   test:
-    - "php -f bin/test-sasl-auth.php"
+    - "vendor/bin/tester test/"
+    #- "php -f bin/test-sasl-auth.php"
+
+  bash:
+    - "/bin/bash"
+

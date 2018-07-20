@@ -62,12 +62,12 @@ command -v docker >/dev/null 2>&1 || { echo -e "$COLOR_LIGHT_RED I require docke
 
 
 
-_KICKSTART_DOC_URL="https://github.com/c7lab/kickstart/"
-_KICKSTART_UPGRADE_URL="https://raw.githubusercontent.com/c7lab/kickstart/master/opt/kickstart.sh"
-_KICKSTART_RELEASE_NOTES_URL="https://raw.githubusercontent.com/c7lab/kickstart/master/opt/kickstart-release-notes.txt"
-_KICKSTART_VERSION_URL="https://raw.githubusercontent.com/c7lab/kickstart/master/opt/kickstart-release.txt"
+_KICKSTART_DOC_URL="https://github.com/infracamp/kickstart/"
+_KICKSTART_UPGRADE_URL="https://raw.githubusercontent.com/infracamp/kickstart/master/dist/kickstart.sh"
+_KICKSTART_RELEASE_NOTES_URL="https://raw.githubusercontent.com/infracamp/kickstart/master/dist/kickstart-release-notes.txt"
+_KICKSTART_VERSION_URL="https://raw.githubusercontent.com/infracamp/kickstart/master/dist/kickstart-release.txt"
 
-_KICKSTART_CURRENT_VERSION="1.1.1"
+_KICKSTART_CURRENT_VERSION="1.2.0"
 
 ##
 # This variables can be overwritten by ~/.kickstartconfig
@@ -75,7 +75,7 @@ _KICKSTART_CURRENT_VERSION="1.1.1"
 KICKSTART_WIN_PATH=""
 
 # Publish ports - separated by semikolon (define it in .kickstartconfig)
-KICKSTART_PORTS="80:4200/tcp"
+KICKSTART_PORTS="80:80/tcp"
 # KICKSTART_PORTS="80:4200/tcp;81:4450/udp"
 
 KICKSTART_DOCKER_OPTS=""
@@ -135,7 +135,7 @@ _usage() {
 _print_header() {
     echo -e $COLOR_WHITE "
 
- C7Lab's
+ infracamp's
    ▄█   ▄█▄  ▄█   ▄████████    ▄█   ▄█▄    ▄████████     ███        ▄████████    ▄████████     ███
   ███ ▄███▀ ███  ███    ███   ███ ▄███▀   ███    ███ ▀█████████▄   ███    ███   ███    ███ ▀█████████▄
   ███▐██▀   ███▌ ███    █▀    ███▐██▀     ███    █▀     ▀███▀▀██   ███    ███   ███    ███    ▀███▀▀██
@@ -145,10 +145,10 @@ _print_header() {
   ███ ▀███▄ ███  ███    ███   ███ ▀███▄    ▄█    ███     ███       ███    ███   ███    ███     ███
   ███   ▀█▀ █▀   ████████▀    ███   ▀█▀  ▄████████▀     ▄████▀     ███    █▀    ███    ███    ▄████▀
   ▀                           ▀                                                 ███    ███
-                                                                                      happy containers
+  www.infracamp.com/kickstart                                                          happy containers
   " $COLOR_YELLOW "
 +-------------------------------------------------------------------------------------------------------+
-| C7Lab Kickstart - DEVELOPER MODE                                                                      |
+| Infracamp's Kickstart - DEVELOPER MODE                                                                |
 | Version: $_KICKSTART_CURRENT_VERSION
 | Flavour: $USE_PIPF_VERSION (defined in 'from:'-section of .kick.yml)"
 
@@ -161,9 +161,10 @@ _print_header() {
         echo "| UPDATE AVAILABLE: Head Version: $KICKSTART_NEWEST_VERSION"
         echo "| To Upgrade Version: Run ./kickstart.sh --upgrade                              "
         echo "|                                                                                 "
+        sleep 5
     fi;
 
-    echo "| More information: https://github.com/continue/kickstart                         "
+    echo "| More information: https://github.com/infracamp/kickstart                         "
     echo "| Or ./kickstart.sh help                                                                                |"
     echo "+-------------------------------------------------------------------------------------------------------+"
 

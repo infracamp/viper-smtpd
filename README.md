@@ -10,6 +10,8 @@
 - See the configuration files
     - [postfix/main.cf](etc/postfix/main.cf)
 - [Lessons learned creating this container](doc/LESSONS_LEARNED.md)
+- [Dockerhub project page](https://hub.docker.com/r/infracamp/viper-smtpd/)
+
 
 ## Running the container
 
@@ -17,10 +19,11 @@ Create a `smtp-config.json` and adjust ist to your needs. ([See demo.json](doc/d
 
 ```
 {
+    "myhostname": "smtp.demo.host",
     "mynetworks": "127.0.0.1",
     "sasl_users": [
-        "user:crypted_passwd:sender@domain1.de,@domain2.de"
-        "nextUser:crypted_passwd:allowed@domain2.de"
+        "user1@domain.de:passwd:sender@domain1.de,@domain2.de"
+        "user2@domain.de:passwd:@domain2.de"
     ]
 }
 ```
@@ -28,20 +31,33 @@ Create a `smtp-config.json` and adjust ist to your needs. ([See demo.json](doc/d
 To start the container in production mode just call:
 
 ```
-docker run --net host -e CONF_JSON=$(printf %q "`cat smtp-config.json`") infracamp/viper-smtpd
+docker run --net host -e "CONF_JSON=$(cat doc/smtp-config.json)" infracamp/viper-smtpd
 ```
 
 or use
 
 ```
-awk '1' [input-file.json]
+tr -d '\n' < doc/smtp-config.json
 ```
 
 to create a string representation to put into env-File
 
+## Debugging
+
+
+
+```
+docker run -it --net host -e "CONF_JSON=$(cat doc/smtp-config.json)" infracamp/viper-smtpd
+```
+
+## Why is it highly recommend to run the container run in `--net host`-mode
+
+- Only in `--net host` the container sees the real remote ip
+- Only in `--net host` the container can see its read hostname
 
 ## Creating Passwords
 
+Passwords are stored in plain text so support digest-* authentication.
 
 ## Contributing
 
