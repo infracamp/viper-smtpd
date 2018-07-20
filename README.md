@@ -9,6 +9,8 @@
 - See the configuration files
     - [postfix/main.cf](etc/postfix/main.cf)
 - [Lessons learned creating this container](doc/LESSONS_LEARNED.md)
+- [Dockerhub project page](https://hub.docker.com/r/infracamp/viper-smtpd/)
+
 
 ## Running the container
 
@@ -40,8 +42,14 @@ awk '1' [input-file.json]
 to create a string representation to put into env-File
 
 
+## Why is it highly recommend to run the container run in `--net host`-mode
+
+- Only in `--net host` the container sees the real remote ip
+- Only in `--net host` the container can see its read hostname
+
 ## Creating Passwords
 
+Passwords are stored in plain text so support digest-* authentication.
 
 ## Contributing
 
