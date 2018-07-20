@@ -17,13 +17,18 @@ define("FILES_ENV_SENDERS", "/etc/postfix/controlled_envelope_senders");
 
 
 $config = json_decode(CONF_JSON, true);
+if ($config === false)
+    throw new \InvalidArgumentException("Cant parse json from CONF_JSON.");
+
+echo "\nConfig data is:\n";
+print_r ($config);
 
 
 $tpl = new TextTemplate();
 $tpl->loadTemplate(file_get_contents(__DIR__ . "/../etc/postfix/main.cf"));
 
 echo "\nWriting /etc/postfix/main.cfg...";
-file_put_contents("/etc/postfix/main.cf", $tpl->apply($config));
+file_put_contents("/etc/postfix/main.cf", $echo = $tpl->apply($config));
 
 
 file_put_contents("/etc/postfix/sasl/smtpd.conf", file_get_contents(__DIR__ . "/../etc/postfix/sasl/smtpd.conf"));
