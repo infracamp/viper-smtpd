@@ -31,3 +31,4 @@ command:
 
   bash:
     - "/bin/bash"
+
