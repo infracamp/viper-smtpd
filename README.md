@@ -65,3 +65,4 @@ Help us developing this container. To start the container just run `./kickstart.
 ## References
 
 - [Postfix SASL](http://www.postfix.org/SASL_README.html)
+- [DKIM Wizard](https://www.port25.com/support/domainkeysdkim-wizard/)
